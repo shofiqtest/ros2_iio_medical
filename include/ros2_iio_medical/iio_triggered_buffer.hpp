@@ -62,25 +62,33 @@ private:
   // Acquisition loop — runs in worker thread, woken by epoll
   void read_loop();
 
+  // Hardware watchdog
+  void open_watchdog();
+  void kick_watchdog();
+  void close_watchdog();
+
   // sysfs helpers
   bool sysfs_write(const std::string & rel_path, const std::string & value);
   bool sysfs_read(const std::string & rel_path, std::string & value);
 
   // Parameters
-  std::string sysfs_path_;   // /sys/bus/iio/devices/iio:device0
-  std::string dev_path_;     // /dev/iio:device0
+  std::string sysfs_path_;           // /sys/bus/iio/devices/iio:device0
+  std::string dev_path_;             // /dev/iio:device0
   std::string topic_name_;
+  std::string watchdog_device_;      // e.g. /dev/watchdog (empty = disabled)
   int         num_channels_;
-  int         buffer_length_;  // depth in samples
+  int         buffer_length_;        // depth in samples
+  int         watchdog_timeout_sec_; // watchdog reset timeout
 
   // Channel layout discovered at runtime
   std::vector<IIOChannelSpec> channels_;
   size_t                      sample_size_ = 0;  // bytes per sample
 
   // File descriptors
-  int iio_fd_    = -1;  // /dev/iio:deviceN
-  int epoll_fd_  = -1;
-  int event_fd_  = -1;  // eventfd used to unblock epoll on shutdown
+  int iio_fd_      = -1;  // /dev/iio:deviceN
+  int epoll_fd_    = -1;
+  int event_fd_    = -1;  // eventfd used to unblock epoll on shutdown
+  int watchdog_fd_ = -1;  // /dev/watchdog (optional)
 
   // Worker thread
   std::thread        worker_;

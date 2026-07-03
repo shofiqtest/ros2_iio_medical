@@ -28,8 +28,10 @@
 #include "ros2_iio_medical/iio_channel.hpp"
 
 #include <fcntl.h>
+#include <linux/watchdog.h>
 #include <sys/epoll.h>
 #include <sys/eventfd.h>
+#include <sys/ioctl.h>
 #include <unistd.h>
 
 #include <algorithm>
@@ -57,6 +59,11 @@ IIOTriggeredNode::IIOTriggeredNode(const rclcpp::NodeOptions & options)
   buffer_length_ = this->declare_parameter<int>("buffer_length", 64);
   topic_name_   = this->declare_parameter<std::string>(
     "topic_name", "/biosignal/eeg");
+  watchdog_device_ = this->declare_parameter<std::string>(
+    "watchdog_device", "");
+  watchdog_timeout_sec_ = this->declare_parameter<int>("watchdog_timeout_sec", 5);
+
+  open_watchdog();
 
   publisher_ = this->create_publisher<std_msgs::msg::Float64MultiArray>(
     topic_name_, 10);
@@ -294,9 +301,56 @@ void IIOTriggeredNode::read_loop()
         }
 
         publisher_->publish(msg);
+
+        // Kick hardware watchdog — proves acquisition loop is alive
+        kick_watchdog();
       }
     }
   }
+}
+
+// ── Hardware watchdog ─────────────────────────────────────────────────────────
+
+void IIOTriggeredNode::open_watchdog()
+{
+  if (watchdog_device_.empty()) {
+    return;
+  }
+  watchdog_fd_ = ::open(watchdog_device_.c_str(), O_RDWR);
+  if (watchdog_fd_ < 0) {
+    RCLCPP_WARN(this->get_logger(),
+      "Could not open watchdog %s: %s (continuing without watchdog)",
+      watchdog_device_.c_str(), std::strerror(errno));
+    watchdog_fd_ = -1;
+    return;
+  }
+  // Set timeout
+  int timeout = watchdog_timeout_sec_;
+  if (::ioctl(watchdog_fd_, WDIOC_SETTIMEOUT, &timeout) < 0) {
+    RCLCPP_WARN(this->get_logger(), "WDIOC_SETTIMEOUT failed: %s",
+      std::strerror(errno));
+  }
+  RCLCPP_INFO(this->get_logger(),
+    "Hardware watchdog opened: %s (timeout %d s)",
+    watchdog_device_.c_str(), watchdog_timeout_sec_);
+}
+
+void IIOTriggeredNode::kick_watchdog()
+{
+  if (watchdog_fd_ < 0) return;
+  // Writing any byte resets the watchdog countdown
+  const char kick = 'K';
+  ::write(watchdog_fd_, &kick, 1);
+}
+
+void IIOTriggeredNode::close_watchdog()
+{
+  if (watchdog_fd_ < 0) return;
+  // Writing 'V' tells the watchdog driver a clean shutdown is happening
+  const char magic = 'V';
+  ::write(watchdog_fd_, &magic, 1);
+  ::close(watchdog_fd_);
+  watchdog_fd_ = -1;
 }
 
 
@@ -330,6 +384,8 @@ void IIOTriggeredNode::teardown()
   close_fd(iio_fd_);
   close_fd(epoll_fd_);
   close_fd(event_fd_);
+
+  close_watchdog();
 
   RCLCPP_INFO(this->get_logger(), "IIO triggered bridge stopped");
 }
