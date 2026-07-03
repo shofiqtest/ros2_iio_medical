@@ -19,3 +19,30 @@ jobs:
         with:
           package-name: ros2_iio_medical
           target-ros2-distro: humble
+          colcon-defaults: |
+            {
+              "build": {
+                "cmake-args": ["-DBUILD_TESTING=ON"]
+              }
+            }
+
+  static_analysis:
+    name: cppcheck Static Analysis
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install cppcheck
+        run: sudo apt-get install -y cppcheck
+
+      - name: Run cppcheck
+        run: |
+          cppcheck \
+            --enable=warning,style,performance,portability \
+            --error-exitcode=1 \
+            --suppress=missingInclude \
+            --suppress=missingIncludeSystem \
+            --std=c++17 \
+            --quiet \
+            -I include \
+            src/ include/ test/

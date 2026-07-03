@@ -47,7 +47,18 @@ install(DIRECTORY include/
   DESTINATION include)
 
 if(BUILD_TESTING)
+  find_package(ament_cmake_gtest REQUIRED)
   find_package(ament_lint_auto REQUIRED)
+
+  # IEC 62304 unit tests — SRS-04 channel parsing, SRS-05 sample extraction
+  ament_add_gtest(test_channel_parser test/test_channel_parser.cpp)
+
+  target_include_directories(test_channel_parser PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
+
+  target_compile_features(test_channel_parser PUBLIC cxx_std_17)
+
+  # Suppress strict linters (style enforcers) — not required for this package
   set(ament_cmake_cpplint_FOUND TRUE)
   set(ament_cmake_uncrustify_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()

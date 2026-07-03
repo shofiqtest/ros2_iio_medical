@@ -30,6 +30,8 @@
 //   /sys/bus/iio/devices/iio:deviceN/buffer/enable                   start/stop
 //   /dev/iio:deviceN                                                  read data
 
+#include "ros2_iio_medical/iio_channel.hpp"
+
 #include <rclcpp/rclcpp.hpp>
 #include <std_msgs/msg/float64_multi_array.hpp>
 
@@ -40,21 +42,6 @@
 
 namespace ros2_iio_medical
 {
-
-// Describes one IIO channel as parsed from scan_elements sysfs
-struct IIOChannelSpec
-{
-  int         index        = 0;
-  std::string name;
-  bool        is_signed    = true;
-  uint8_t     real_bits    = 24;   // actual ADC bits (e.g. 24 for ADS1299)
-  uint8_t     storage_bits = 32;   // bits in buffer (aligned, e.g. 32)
-  uint8_t     shift        = 0;
-  bool        little_endian = true;
-  double      scale        = 1.0;  // LSB → mV
-
-  size_t storage_bytes() const { return storage_bits / 8u; }
-};
 
 class IIOTriggeredNode : public rclcpp::Node
 {
@@ -67,7 +54,6 @@ public:
 private:
   // Buffer lifecycle
   bool discover_channels();
-  bool parse_channel_type(const std::string & type_str, IIOChannelSpec & spec);
   bool enable_channels();
   bool configure_buffer();
   bool open_device();
@@ -75,10 +61,6 @@ private:
 
   // Acquisition loop — runs in worker thread, woken by epoll
   void read_loop();
-
-  // Extract one channel value from a raw binary sample
-  double extract_sample(const uint8_t * buf, size_t offset,
-    const IIOChannelSpec & spec) const;
 
   // sysfs helpers
   bool sysfs_write(const std::string & rel_path, const std::string & value);

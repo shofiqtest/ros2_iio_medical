@@ -25,6 +25,7 @@
 //   ✓ Correct approach for continuous biosignal acquisition (ECG, EEG)
 
 #include "ros2_iio_medical/iio_triggered_buffer.hpp"
+#include "ros2_iio_medical/iio_channel.hpp"
 
 #include <fcntl.h>
 #include <sys/epoll.h>
@@ -113,7 +114,7 @@ bool IIOTriggeredNode::discover_channels()
       RCLCPP_WARN(this->get_logger(), "Channel %d has no type — skipping", i);
       continue;
     }
-    if (!parse_channel_type(type_str, spec)) {
+    if (!ros2_iio_medical::parse_channel_type(type_str, spec)) {
       RCLCPP_WARN(this->get_logger(),
         "Cannot parse type '%s' for channel %d", type_str.c_str(), i);
       continue;
@@ -157,41 +158,7 @@ bool IIOTriggeredNode::discover_channels()
   return true;
 }
 
-// ── Parse type string ─────────────────────────────────────────────────────────
-//
-// Format: "le:s24/32>>0"
-//          ^^  ^ ^^  ^
-//          |   | |   shift
-//          |   | storagebits
-//          |   realbits (s = signed, u = unsigned)
-//          endian
-
-bool IIOTriggeredNode::parse_channel_type(
-  const std::string & type_str, IIOChannelSpec & spec)
-{
-  // Expected: "le:s24/32>>0" or "be:u16/16>>0"
-  char endian[4] = {};
-  char sign       = 0;
-  int  real_bits  = 0;
-  int  store_bits = 0;
-  int  shift      = 0;
-
-  int matched = std::sscanf(type_str.c_str(),
-    "%2[^:]:%c%d/%d>>%d",
-    endian, &sign, &real_bits, &store_bits, &shift);
-
-  if (matched != 5) {
-    return false;
-  }
-
-  spec.little_endian = (std::string(endian) == "le");
-  spec.is_signed     = (sign == 's');
-  spec.real_bits     = static_cast<uint8_t>(real_bits);
-  spec.storage_bits  = static_cast<uint8_t>(store_bits);
-  spec.shift         = static_cast<uint8_t>(shift);
-
-  return true;
-}
+// parse_channel_type and extract_sample are free functions in iio_channel.hpp
 
 // ── Enable channels in scan_elements ─────────────────────────────────────────
 
@@ -322,7 +289,7 @@ void IIOTriggeredNode::read_loop()
 
         size_t offset = 0;
         for (size_t ch = 0; ch < channels_.size(); ++ch) {
-          msg.data[ch] = extract_sample(raw.data(), offset, channels_[ch]);
+          msg.data[ch] = ros2_iio_medical::extract_sample(raw.data(), offset, channels_[ch]);
           offset += channels_[ch].storage_bytes();
         }
 
@@ -332,42 +299,6 @@ void IIOTriggeredNode::read_loop()
   }
 }
 
-// ── Extract one channel value from raw buffer bytes ───────────────────────────
-
-double IIOTriggeredNode::extract_sample(
-  const uint8_t * buf, size_t offset, const IIOChannelSpec & spec) const
-{
-  // Reconstruct integer from storage_bytes
-  uint64_t raw_val = 0;
-  const uint8_t * p = buf + offset;
-
-  if (spec.little_endian) {
-    for (uint8_t b = 0; b < spec.storage_bytes(); ++b) {
-      raw_val |= static_cast<uint64_t>(p[b]) << (8u * b);
-    }
-  } else {
-    for (uint8_t b = 0; b < spec.storage_bytes(); ++b) {
-      raw_val = (raw_val << 8u) | p[b];
-    }
-  }
-
-  // Apply shift
-  raw_val >>= spec.shift;
-
-  // Mask to real bits
-  uint64_t mask = (1ULL << spec.real_bits) - 1ULL;
-  raw_val &= mask;
-
-  // Sign extend if signed
-  int64_t signed_val = 0;
-  if (spec.is_signed && (raw_val & (1ULL << (spec.real_bits - 1u)))) {
-    signed_val = static_cast<int64_t>(raw_val | (~mask));
-  } else {
-    signed_val = static_cast<int64_t>(raw_val);
-  }
-
-  return static_cast<double>(signed_val) * spec.scale;
-}
 
 // ── Teardown ──────────────────────────────────────────────────────────────────
 
