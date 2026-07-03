@@ -60,58 +60,65 @@
   <line x1="858" y1="660" x2="1178" y2="660" stroke="#21262d" stroke-width="1"/>
 
   <!-- ROS2 security (y=102–162) -->
-  <text x="870" y="115" fill="#3fb950" font-size="9" font-weight="700">ROS 2 LAYER</text>
-  <text x="870" y="130" fill="#484f58" font-size="9">⚠  DDS Security (SROS2) not enabled</text>
-  <text x="870" y="144" fill="#484f58" font-size="9">⚠  Topic encryption not configured</text>
-  <text x="870" y="158" fill="#484f58" font-size="9">⚠  Node authentication not set up</text>
+  <text x="870" y="114" fill="#3fb950" font-size="9" font-weight="700">ROS 2 LAYER</text>
+  <text x="870" y="127" fill="#484f58" font-size="9">⚠  DDS Security (SROS2) not enabled</text>
+  <text x="870" y="140" fill="#484f58" font-size="9">⚠  Topic encryption not configured</text>
+  <text x="870" y="153" fill="#484f58" font-size="9">⚠  Node authentication not set up</text>
 
   <!-- User space security (y=162–336) -->
-  <text x="870" y="177" fill="#f85149" font-size="9" font-weight="700">USER SPACE</text>
-  <text x="870" y="192" fill="#3fb950" font-size="9">✓  Runs as non-root process</text>
-  <text x="870" y="206" fill="#3fb950" font-size="9">✓  No raw hardware access</text>
-  <text x="870" y="220" fill="#3fb950" font-size="9">✓  Reads kernel IIO interface only</text>
-  <text x="870" y="234" fill="#484f58" font-size="9">⚠  seccomp filter not applied</text>
-  <text x="870" y="248" fill="#484f58" font-size="9">⚠  No process namespace isolation</text>
-  <text x="870" y="262" fill="#484f58" font-size="9">⚠  SROS2 DDS plugin not configured</text>
-  <text x="870" y="276" fill="#484f58" font-size="9">⚠  No AppArmor profile for nodes</text>
-  <text x="870" y="294" fill="#d29922" font-size="8" font-style="italic">For production: enable SROS2 +</text>
-  <text x="870" y="306" fill="#d29922" font-size="8" font-style="italic">seccomp + AppArmor per node</text>
-  <text x="870" y="320" fill="#d29922" font-size="8" font-style="italic">See: FDA Cybersecurity 2023 guidance</text>
+  <text x="870" y="174" fill="#f85149" font-size="9" font-weight="700">USER SPACE</text>
+  <text x="870" y="187" fill="#3fb950" font-size="9">✓  Runs as non-root process</text>
+  <text x="870" y="199" fill="#3fb950" font-size="9">✓  No raw hardware access</text>
+  <text x="870" y="211" fill="#3fb950" font-size="9">✓  Reads kernel IIO interface only</text>
+  <text x="870" y="223" fill="#484f58" font-size="9">⚠  seccomp filter not applied</text>
+  <text x="870" y="235" fill="#484f58" font-size="9">⚠  SROS2 DDS plugin not configured</text>
+  <text x="870" y="247" fill="#484f58" font-size="9">⚠  No AppArmor profile for nodes</text>
+  <text x="870" y="261" fill="#f85149" font-size="8.5" font-weight="600">Memory Safety (Userspace)</text>
+  <text x="870" y="273" fill="#484f58" font-size="9">⚠  Valgrind / Memcheck not in CI</text>
+  <text x="870" y="285" fill="#484f58" font-size="9">⚠  ASAN / UBSan not compiled in</text>
+  <text x="870" y="297" fill="#484f58" font-size="9">⚠  No runtime memory leak monitor</text>
+  <text x="870" y="312" fill="#d29922" font-size="8" font-style="italic">Add: colcon test + ament_valgrind</text>
+  <text x="870" y="323" fill="#d29922" font-size="8" font-style="italic">-DCMAKE_BUILD_TYPE=ASAN for CI</text>
 
   <!-- Kernel security (y=336–558) -->
-  <text x="870" y="352" fill="#388bfd" font-size="9" font-weight="700">KERNEL SPACE</text>
-  <text x="870" y="367" fill="#3fb950" font-size="9">✓  Kernel address isolation (KASLR)</text>
-  <text x="870" y="381" fill="#3fb950" font-size="9">✓  Stack smash protection (SSP)</text>
-  <text x="870" y="395" fill="#3fb950" font-size="9">✓  Driver runs in kernel space only</text>
-  <text x="870" y="409" fill="#3fb950" font-size="9">✓  No direct userspace HW access</text>
-  <text x="870" y="423" fill="#484f58" font-size="9">⚠  dm-verity (rootfs integrity) not set</text>
-  <text x="870" y="437" fill="#484f58" font-size="9">⚠  IMA file integrity not configured</text>
-  <text x="870" y="451" fill="#484f58" font-size="9">⚠  Kernel module signing disabled</text>
-  <text x="870" y="465" fill="#484f58" font-size="9">⚠  LSM (AppArmor/SELinux) not enabled</text>
-  <text x="870" y="479" fill="#484f58" font-size="9">⚠  Kernel lockdown mode not set</text>
-  <text x="870" y="497" fill="#d29922" font-size="8" font-style="italic">For production: dm-verity on rootfs,</text>
-  <text x="870" y="509" fill="#d29922" font-size="8" font-style="italic">IMA policy, module signing, SELinux</text>
-  <text x="870" y="521" fill="#d29922" font-size="8" font-style="italic">mandatory for IEC 62443 / FDA devices</text>
-  <text x="870" y="535" fill="#d29922" font-size="8" font-style="italic">Yocto meta-security layer available</text>
+  <text x="870" y="349" fill="#388bfd" font-size="9" font-weight="700">KERNEL SPACE</text>
+  <text x="870" y="361" fill="#3fb950" font-size="9">✓  KASLR (kernel address randomization)</text>
+  <text x="870" y="373" fill="#3fb950" font-size="9">✓  Stack smash protection (SSP)</text>
+  <text x="870" y="385" fill="#3fb950" font-size="9">✓  No direct userspace HW access</text>
+  <text x="870" y="397" fill="#484f58" font-size="9">⚠  dm-verity (rootfs integrity) not set</text>
+  <text x="870" y="409" fill="#484f58" font-size="9">⚠  IMA file integrity not configured</text>
+  <text x="870" y="421" fill="#484f58" font-size="9">⚠  LSM / AppArmor / SELinux not on</text>
+  <text x="870" y="433" fill="#484f58" font-size="9">⚠  auditd (intrusion detection) off</text>
+  <text x="870" y="447" fill="#388bfd" font-size="8.5" font-weight="600">Kernel Memory Safety</text>
+  <text x="870" y="459" fill="#484f58" font-size="9">⚠  KASAN not enabled in build</text>
+  <text x="870" y="471" fill="#484f58" font-size="9">⚠  KMEMLEAK detector disabled</text>
+  <text x="870" y="483" fill="#484f58" font-size="9">⚠  KFENCE memory guard not set</text>
+  <text x="870" y="495" fill="#484f58" font-size="9">⚠  Kernel module signing disabled</text>
+  <text x="870" y="509" fill="#d29922" font-size="8" font-style="italic">KASAN/KMEMLEAK: enable during dev,</text>
+  <text x="870" y="520" fill="#d29922" font-size="8" font-style="italic">disable in prod (perf cost). dm-verity</text>
+  <text x="870" y="531" fill="#d29922" font-size="8" font-style="italic">+ IMA mandatory for IEC 62443 / FDA</text>
+  <text x="870" y="542" fill="#d29922" font-size="8" font-style="italic">Yocto meta-security layer available</text>
 
   <!-- U-Boot security (y=558–660) -->
-  <text x="870" y="574" fill="#d29922" font-size="9" font-weight="700">U-BOOT</text>
-  <text x="870" y="589" fill="#d29922" font-size="9">★  VPD calibration chain ← your patch</text>
-  <text x="870" y="603" fill="#3fb950" font-size="9">✓  SPL → U-Boot chain of custody</text>
-  <text x="870" y="617" fill="#484f58" font-size="9">⚠  Verified Boot (FIT signing) needed</text>
-  <text x="870" y="631" fill="#484f58" font-size="9">⚠  Anti-rollback not configured</text>
-  <text x="870" y="645" fill="#484f58" font-size="9">⚠  Secure key storage (HAB) not set</text>
+  <text x="870" y="572" fill="#d29922" font-size="9" font-weight="700">U-BOOT</text>
+  <text x="870" y="585" fill="#d29922" font-size="9">★  VPD calibration chain ← your patch</text>
+  <text x="870" y="597" fill="#3fb950" font-size="9">✓  SPL → U-Boot chain of custody</text>
+  <text x="870" y="609" fill="#484f58" font-size="9">⚠  Verified Boot / FIT signing needed</text>
+  <text x="870" y="621" fill="#484f58" font-size="9">⚠  Anti-rollback (fuse counter) not set</text>
+  <text x="870" y="633" fill="#484f58" font-size="9">⚠  Secure key storage (HAB) not set</text>
+  <text x="870" y="647" fill="#d29922" font-size="8" font-style="italic">FIT image: sign kernel + DTB + initrd</text>
 
   <!-- Hardware security (y=660–818) -->
-  <text x="870" y="676" fill="#3fb950" font-size="9" font-weight="700">HARDWARE</text>
-  <text x="870" y="691" fill="#3fb950" font-size="9">✓  ARM TrustZone (Secure World)</text>
-  <text x="870" y="705" fill="#3fb950" font-size="9">✓  Hardware TRNG for crypto keys</text>
-  <text x="870" y="719" fill="#3fb950" font-size="9">✓  No direct userspace HW access</text>
-  <text x="870" y="733" fill="#3fb950" font-size="9">✓  Kernel driver model enforced</text>
-  <text x="870" y="747" fill="#484f58" font-size="9">⚠  Secure Element / TPM optional</text>
-  <text x="870" y="765" fill="#d29922" font-size="8" font-style="italic">TrustZone separates: secure boot</text>
-  <text x="870" y="777" fill="#d29922" font-size="8" font-style="italic">key storage from Linux OS runtime</text>
-  <text x="870" y="789" fill="#d29922" font-size="8" font-style="italic">OP-TEE OS can run in secure world</text>
+  <text x="870" y="673" fill="#3fb950" font-size="9" font-weight="700">HARDWARE</text>
+  <text x="870" y="686" fill="#3fb950" font-size="9">✓  ARM TrustZone (Secure World)</text>
+  <text x="870" y="698" fill="#3fb950" font-size="9">✓  Hardware TRNG for crypto keys</text>
+  <text x="870" y="710" fill="#3fb950" font-size="9">✓  Kernel driver model enforced</text>
+  <text x="870" y="722" fill="#3fb950" font-size="9">✓  No direct userspace HW access</text>
+  <text x="870" y="734" fill="#484f58" font-size="9">⚠  Secure Element / TPM optional</text>
+  <text x="870" y="746" fill="#484f58" font-size="9">⚠  OP-TEE OS not provisioned</text>
+  <text x="870" y="760" fill="#d29922" font-size="8" font-style="italic">TrustZone separates secure boot key</text>
+  <text x="870" y="771" fill="#d29922" font-size="8" font-style="italic">storage from Linux OS runtime</text>
+  <text x="870" y="782" fill="#d29922" font-size="8" font-style="italic">OP-TEE in secure world = key vault</text>
 
   <!-- ══════════════════════════════════════════
        SECTION 1 — ROS 2 TOPICS  (top = high abstraction)
