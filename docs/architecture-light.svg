@@ -1,251 +1,270 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" font-family="'Segoe UI',system-ui,-apple-system,sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 840" font-family="'Segoe UI',system-ui,-apple-system,sans-serif">
   <defs>
-    <!-- Drop shadow filter -->
-    <filter id="shadow" x="-5%" y="-5%" width="110%" height="120%">
+    <filter id="shadow" x="-5%" y="-5%" width="115%" height="125%">
       <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#00000018"/>
     </filter>
-    <filter id="shadow-md" x="-5%" y="-5%" width="115%" height="125%">
+    <filter id="shadow-md" x="-8%" y="-5%" width="120%" height="130%">
       <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#00000020"/>
     </filter>
-    <!-- Arrow markers -->
-    <marker id="arrow-green" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+    <marker id="arr-green" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
       <path d="M0,0 L0,6 L8,3 z" fill="#16a34a"/>
     </marker>
-    <marker id="arrow-blue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+    <marker id="arr-amber" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#d97706"/>
+    </marker>
+    <marker id="arr-blue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
       <path d="M0,0 L0,6 L8,3 z" fill="#2563eb"/>
     </marker>
-    <marker id="arrow-red" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+    <marker id="arr-red" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
       <path d="M0,0 L0,6 L8,3 z" fill="#dc2626"/>
-    </marker>
-    <marker id="arrow-gray" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-      <path d="M0,0 L0,6 L8,3 z" fill="#94a3b8"/>
     </marker>
   </defs>
 
   <!-- Page background -->
-  <rect width="1200" height="720" fill="#f8fafc"/>
+  <rect width="1200" height="840" fill="#f8fafc"/>
 
-  <!-- ══════════════════════════════════════════════════════
-       HEADER
-  ═══════════════════════════════════════════════════════ -->
+  <!-- ══════════ HEADER ══════════ -->
   <rect x="0" y="0" width="1200" height="64" fill="#ffffff" filter="url(#shadow)"/>
   <rect x="0" y="0" width="4" height="64" fill="#2563eb"/>
-
-  <!-- Logo/brand -->
   <rect x="20" y="16" width="32" height="32" fill="#eff6ff" rx="8"/>
   <text x="36" y="37" fill="#2563eb" font-size="16" text-anchor="middle">⚕</text>
   <text x="62" y="30" fill="#0f172a" font-size="14" font-weight="700">kernel-medical</text>
   <text x="62" y="46" fill="#64748b" font-size="11">open source medical Linux infrastructure</text>
-
-  <!-- Title -->
   <text x="600" y="28" fill="#0f172a" font-size="18" font-weight="700" text-anchor="middle">Linux IIO → ROS 2 Medical Acquisition Stack</text>
-  <text x="600" y="48" fill="#64748b" font-size="12" text-anchor="middle">Complete open source pipeline · from analog sensor to surgical robot</text>
-
-  <!-- Badges top right -->
+  <text x="600" y="48" fill="#64748b" font-size="12" text-anchor="middle">Complete open source pipeline · hardware boot → kernel driver → surgical robot</text>
   <rect x="1010" y="14" width="80" height="22" fill="#eff6ff" rx="11" stroke="#bfdbfe" stroke-width="1"/>
   <text x="1050" y="29" fill="#1d4ed8" font-size="10" font-weight="600" text-anchor="middle">Apache-2.0</text>
   <rect x="1100" y="14" width="84" height="22" fill="#f0fdf4" rx="11" stroke="#bbf7d0" stroke-width="1"/>
   <text x="1142" y="29" fill="#15803d" font-size="10" font-weight="600" text-anchor="middle">ROS 2 Humble</text>
 
-  <!-- ══════════════════════════════════════════════════════
-       SECTION 1 — HARDWARE
-  ═══════════════════════════════════════════════════════ -->
+  <!-- ══════════ SECTION 1: HARDWARE ══════════ -->
   <rect x="24" y="80" width="1152" height="112" fill="#f0fdf4" rx="12" stroke="#86efac" stroke-width="1.5" filter="url(#shadow)"/>
-
-  <!-- Section label pill -->
   <rect x="44" y="72" width="100" height="20" fill="#16a34a" rx="10"/>
   <text x="94" y="85" fill="#ffffff" font-size="10" font-weight="700" text-anchor="middle" letter-spacing="1">HARDWARE</text>
 
-  <!-- Chip cards -->
   <!-- ADS1299 -->
-  <rect x="44"  y="92" width="198" height="88" fill="#ffffff" rx="10" stroke="#86efac" stroke-width="1.5" filter="url(#shadow)"/>
-  <rect x="44"  y="92" width="198" height="6"  fill="#16a34a" rx="10"/>
-  <rect x="44"  y="96" width="198" height="2"  fill="#16a34a"/>
-  <text x="143" y="120" fill="#15803d" font-size="13" font-weight="700" text-anchor="middle">TI ADS1299</text>
-  <text x="143" y="138" fill="#374151" font-size="10" text-anchor="middle">8-channel · 24-bit EEG / ECG ADC</text>
-  <rect x="64"  y="148" width="68" height="18" fill="#f0fdf4" rx="9" stroke="#86efac" stroke-width="1"/>
-  <text x="98"  y="160" fill="#15803d" font-size="9" font-weight="600" text-anchor="middle">SPI</text>
-  <rect x="142" y="148" width="80" height="18" fill="#f0fdf4" rx="9" stroke="#86efac" stroke-width="1"/>
-  <text x="182" y="160" fill="#15803d" font-size="9" font-weight="600" text-anchor="middle">DRDY IRQ</text>
+  <rect x="44"  y="90" width="202" height="90" fill="#ffffff" rx="10" stroke="#86efac" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="44"  y="90" width="202" height="6"  fill="#16a34a" rx="10"/>
+  <rect x="44"  y="94" width="202" height="2"  fill="#16a34a"/>
+  <text x="145" y="117" fill="#15803d" font-size="13" font-weight="700" text-anchor="middle">TI ADS1299</text>
+  <text x="145" y="134" fill="#374151" font-size="10" text-anchor="middle">8-ch · 24-bit EEG / ECG ADC</text>
+  <rect x="62"  y="144" width="54" height="17" fill="#f0fdf4" rx="8" stroke="#86efac" stroke-width="1"/>
+  <text x="89"  y="156" fill="#15803d" font-size="9" font-weight="600" text-anchor="middle">SPI</text>
+  <rect x="124" y="144" width="100" height="17" fill="#f0fdf4" rx="8" stroke="#86efac" stroke-width="1"/>
+  <text x="174" y="156" fill="#15803d" font-size="9" font-weight="600" text-anchor="middle">DRDY IRQ</text>
 
   <!-- MAX86150 -->
-  <rect x="258" y="92" width="198" height="88" fill="#ffffff" rx="10" stroke="#86efac" stroke-width="1.5" filter="url(#shadow)"/>
-  <rect x="258" y="92" width="198" height="6"  fill="#16a34a" rx="10"/>
-  <rect x="258" y="96" width="198" height="2"  fill="#16a34a"/>
-  <text x="357" y="120" fill="#15803d" font-size="13" font-weight="700" text-anchor="middle">ADI MAX86150</text>
-  <text x="357" y="138" fill="#374151" font-size="10" text-anchor="middle">ECG + PPG analog front-end</text>
-  <rect x="278" y="148" width="68" height="18" fill="#f0fdf4" rx="9" stroke="#86efac" stroke-width="1"/>
-  <text x="312" y="160" fill="#15803d" font-size="9" font-weight="600" text-anchor="middle">I2C</text>
-  <rect x="356" y="148" width="80" height="18" fill="#f0fdf4" rx="9" stroke="#86efac" stroke-width="1"/>
-  <text x="396" y="160" fill="#15803d" font-size="9" font-weight="600" text-anchor="middle">INT pin</text>
+  <rect x="258" y="90" width="202" height="90" fill="#ffffff" rx="10" stroke="#86efac" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="258" y="90" width="202" height="6"  fill="#16a34a" rx="10"/>
+  <rect x="258" y="94" width="202" height="2"  fill="#16a34a"/>
+  <text x="359" y="117" fill="#15803d" font-size="13" font-weight="700" text-anchor="middle">ADI MAX86150</text>
+  <text x="359" y="134" fill="#374151" font-size="10" text-anchor="middle">ECG + PPG analog front-end</text>
+  <rect x="276" y="144" width="54" height="17" fill="#f0fdf4" rx="8" stroke="#86efac" stroke-width="1"/>
+  <text x="303" y="156" fill="#15803d" font-size="9" font-weight="600" text-anchor="middle">I2C</text>
+  <rect x="340" y="144" width="98" height="17" fill="#f0fdf4" rx="8" stroke="#86efac" stroke-width="1"/>
+  <text x="389" y="156" fill="#15803d" font-size="9" font-weight="600" text-anchor="middle">INT pin</text>
 
   <!-- MAX30102 -->
-  <rect x="472" y="92" width="198" height="88" fill="#ffffff" rx="10" stroke="#86efac" stroke-width="1.5" filter="url(#shadow)"/>
-  <rect x="472" y="92" width="198" height="6"  fill="#16a34a" rx="10"/>
-  <rect x="472" y="96" width="198" height="2"  fill="#16a34a"/>
-  <text x="571" y="120" fill="#15803d" font-size="13" font-weight="700" text-anchor="middle">ADI MAX30102</text>
-  <text x="571" y="138" fill="#374151" font-size="10" text-anchor="middle">SpO₂ · Heart-rate sensor</text>
-  <rect x="492" y="148" width="68" height="18" fill="#f0fdf4" rx="9" stroke="#86efac" stroke-width="1"/>
-  <text x="526" y="160" fill="#15803d" font-size="9" font-weight="600" text-anchor="middle">I2C</text>
-  <rect x="570" y="148" width="80" height="18" fill="#f0fdf4" rx="9" stroke="#86efac" stroke-width="1"/>
-  <text x="610" y="160" fill="#15803d" font-size="9" font-weight="600" text-anchor="middle">INT pin</text>
+  <rect x="472" y="90" width="202" height="90" fill="#ffffff" rx="10" stroke="#86efac" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="472" y="90" width="202" height="6"  fill="#16a34a" rx="10"/>
+  <rect x="472" y="94" width="202" height="2"  fill="#16a34a"/>
+  <text x="573" y="117" fill="#15803d" font-size="13" font-weight="700" text-anchor="middle">ADI MAX30102</text>
+  <text x="573" y="134" fill="#374151" font-size="10" text-anchor="middle">SpO₂ · Heart-rate sensor</text>
+  <rect x="490" y="144" width="54" height="17" fill="#f0fdf4" rx="8" stroke="#86efac" stroke-width="1"/>
+  <text x="517" y="156" fill="#15803d" font-size="9" font-weight="600" text-anchor="middle">I2C</text>
+  <rect x="554" y="144" width="98" height="17" fill="#f0fdf4" rx="8" stroke="#86efac" stroke-width="1"/>
+  <text x="603" y="156" fill="#15803d" font-size="9" font-weight="600" text-anchor="middle">INT pin</text>
 
   <!-- ti-ads1298 -->
-  <rect x="686" y="92" width="198" height="88" fill="#ffffff" rx="10" stroke="#86efac" stroke-width="1.5" filter="url(#shadow)"/>
-  <rect x="686" y="92" width="198" height="6"  fill="#16a34a" rx="10"/>
-  <rect x="686" y="96" width="198" height="2"  fill="#16a34a"/>
-  <text x="785" y="120" fill="#15803d" font-size="13" font-weight="700" text-anchor="middle">TI ti-ads1298</text>
-  <text x="785" y="138" fill="#374151" font-size="10" text-anchor="middle">8-channel · 24-bit ECG ADC</text>
-  <rect x="706" y="148" width="68" height="18" fill="#f0fdf4" rx="9" stroke="#86efac" stroke-width="1"/>
-  <text x="740" y="160" fill="#15803d" font-size="9" font-weight="600" text-anchor="middle">SPI</text>
-  <rect x="784" y="148" width="80" height="18" fill="#f0fdf4" rx="9" stroke="#86efac" stroke-width="1"/>
-  <text x="824" y="160" fill="#15803d" font-size="9" font-weight="600" text-anchor="middle">DRDY IRQ</text>
+  <rect x="686" y="90" width="202" height="90" fill="#ffffff" rx="10" stroke="#86efac" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="686" y="90" width="202" height="6"  fill="#16a34a" rx="10"/>
+  <rect x="686" y="94" width="202" height="2"  fill="#16a34a"/>
+  <text x="787" y="117" fill="#15803d" font-size="13" font-weight="700" text-anchor="middle">TI ti-ads1298</text>
+  <text x="787" y="134" fill="#374151" font-size="10" text-anchor="middle">8-ch · 24-bit ECG ADC</text>
+  <rect x="704" y="144" width="54" height="17" fill="#f0fdf4" rx="8" stroke="#86efac" stroke-width="1"/>
+  <text x="731" y="156" fill="#15803d" font-size="9" font-weight="600" text-anchor="middle">SPI</text>
+  <rect x="768" y="144" width="100" height="17" fill="#f0fdf4" rx="8" stroke="#86efac" stroke-width="1"/>
+  <text x="818" y="156" fill="#15803d" font-size="9" font-weight="600" text-anchor="middle">DRDY IRQ</text>
 
   <!-- Any IIO device -->
-  <rect x="900" y="92" width="256" height="88" fill="#f8fafc" rx="10" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="6,3"/>
-  <text x="1028" y="126" fill="#94a3b8" font-size="13" font-weight="600" text-anchor="middle">Any Linux IIO Device</text>
-  <text x="1028" y="146" fill="#94a3b8" font-size="10" text-anchor="middle">Standard IIO sysfs interface</text>
-  <text x="1028" y="163" fill="#cbd5e1" font-size="9" text-anchor="middle">SPI · I2C · parallel</text>
+  <rect x="900" y="90" width="258" height="90" fill="#f8fafc" rx="10" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="1029" y="122" fill="#94a3b8" font-size="12" font-weight="600" text-anchor="middle">Any Linux IIO Device</text>
+  <text x="1029" y="140" fill="#94a3b8" font-size="10" text-anchor="middle">Standard IIO sysfs interface</text>
+  <text x="1029" y="158" fill="#cbd5e1" font-size="9" text-anchor="middle">SPI · I2C · parallel</text>
 
-  <!-- Arrow down -->
-  <line x1="600" y1="192" x2="600" y2="212" stroke="#16a34a" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrow-green)"/>
-  <rect x="616" y="196" width="148" height="14" fill="#f8fafc"/>
-  <text x="690" y="207" fill="#64748b" font-size="10" text-anchor="middle">SPI / I2C · hardware interrupt</text>
+  <!-- Arrow hardware → u-boot (boot chain path) -->
+  <!-- Left arrow: boot path (storage to U-Boot) -->
+  <line x1="220" y1="192" x2="220" y2="218" stroke="#d97706" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr-amber)"/>
+  <!-- Right arrow: runtime data path bypasses U-Boot -->
+  <line x1="800" y1="192" x2="800" y2="330" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr-blue)"/>
+  <rect x="812" y="240" width="178" height="28" fill="#f8fafc" rx="6"/>
+  <text x="900" y="252" fill="#64748b" font-size="9" text-anchor="middle">runtime data path</text>
+  <text x="900" y="264" fill="#64748b" font-size="9" text-anchor="middle">SPI/I2C → IIO drivers</text>
 
-  <!-- ══════════════════════════════════════════════════════
-       SECTION 2 — KERNEL SPACE
-  ═══════════════════════════════════════════════════════ -->
-  <rect x="24" y="218" width="1152" height="206" fill="#eff6ff" rx="12" stroke="#93c5fd" stroke-width="1.5" filter="url(#shadow)"/>
-  <rect x="44" y="210" width="128" height="20" fill="#2563eb" rx="10"/>
-  <text x="108" y="223" fill="#ffffff" font-size="10" font-weight="700" text-anchor="middle" letter-spacing="1">KERNEL SPACE</text>
+  <!-- ══════════ SECTION 2: U-BOOT ══════════ -->
+  <rect x="24" y="224" width="580" height="104" fill="#fffbeb" rx="12" stroke="#fcd34d" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="44" y="216" width="76" height="20" fill="#d97706" rx="10"/>
+  <text x="82" y="229" fill="#ffffff" font-size="10" font-weight="700" text-anchor="middle" letter-spacing="1">U-BOOT</text>
+  <rect x="130" y="216" width="126" height="20" fill="#fef3c7" rx="10" stroke="#fde047" stroke-width="1"/>
+  <text x="193" y="229" fill="#854d0e" font-size="9" font-weight="600" text-anchor="middle">boot time · runs once</text>
 
-  <!-- Your patch badge -->
-  <rect x="990" y="210" width="188" height="20" fill="#fef9c3" rx="10" stroke="#fde047" stroke-width="1"/>
-  <text x="1084" y="223" fill="#854d0e" font-size="10" font-weight="600" text-anchor="middle">★ Your upstream contributions</text>
+  <!-- U-Boot / SPL card -->
+  <rect x="38"  y="232" width="172" height="86" fill="#ffffff" rx="9" stroke="#fcd34d" stroke-width="1.2" filter="url(#shadow)"/>
+  <rect x="38"  y="232" width="172" height="5"  fill="#d97706" rx="9"/>
+  <text x="124" y="253" fill="#92400e" font-size="11" font-weight="700" text-anchor="middle">U-Boot / SPL</text>
+  <line x1="52" y1="260" x2="198" y2="260" stroke="#fef3c7" stroke-width="1"/>
+  <text x="52"  y="274" fill="#6b7280" font-size="9">Initializes DRAM · clocks</text>
+  <text x="52"  y="288" fill="#6b7280" font-size="9">Loads kernel from eMMC / SD</text>
+  <text x="52"  y="302" fill="#6b7280" font-size="9">Orange Pi Zero 2W · H618 SoC</text>
 
-  <!-- IIO Driver card 1 — under review -->
-  <rect x="44"  y="232" width="310" height="100" fill="#ffffff" rx="10" stroke="#93c5fd" stroke-width="1.5" filter="url(#shadow)"/>
-  <rect x="44"  y="232" width="310" height="6"   fill="#3b82f6" rx="10"/>
-  <rect x="44"  y="236" width="310" height="2"   fill="#3b82f6"/>
-  <text x="199" y="260" fill="#1d4ed8" font-size="12" font-weight="700" text-anchor="middle">IIO Driver — Under Review</text>
-  <rect x="64"  y="267" width="110" height="18" fill="#fef9c3" rx="9" stroke="#fde047" stroke-width="1"/>
-  <text x="119" y="279" fill="#854d0e" font-size="9" font-weight="600" text-anchor="middle">★ Your patch</text>
-  <text x="64"  y="304" fill="#374151" font-size="10">ads1299.c — 24-bit EEG/ECG driver</text>
-  <text x="64"  y="320" fill="#374151" font-size="10">max86150.c — ECG + PPG driver</text>
-  <text x="64"  y="332" fill="#94a3b8" font-size="9">lore.kernel.org/linux-iio</text>
+  <!-- Device Tree card -->
+  <rect x="220" y="232" width="186" height="86" fill="#ffffff" rx="9" stroke="#fcd34d" stroke-width="1.2" filter="url(#shadow)"/>
+  <rect x="220" y="232" width="186" height="5"  fill="#d97706" rx="9"/>
+  <text x="313" y="253" fill="#92400e" font-size="11" font-weight="700" text-anchor="middle">Device Tree Blob</text>
+  <line x1="234" y1="260" x2="394" y2="260" stroke="#fef3c7" stroke-width="1"/>
+  <text x="234" y="274" fill="#6b7280" font-size="9">Declares SPI/I2C topology</text>
+  <text x="234" y="288" fill="#6b7280" font-size="9">ADS1299 on SPI · MAX30102 I2C</text>
+  <text x="234" y="302" fill="#6b7280" font-size="9">CS · IRQ · clock speed per device</text>
 
-  <!-- IIO Driver card 2 — merged -->
-  <rect x="370" y="232" width="310" height="100" fill="#ffffff" rx="10" stroke="#93c5fd" stroke-width="1.5" filter="url(#shadow)"/>
-  <rect x="370" y="232" width="310" height="6"   fill="#3b82f6" rx="10"/>
-  <rect x="370" y="236" width="310" height="2"   fill="#3b82f6"/>
-  <text x="525" y="260" fill="#1d4ed8" font-size="12" font-weight="700" text-anchor="middle">IIO Driver — Merged to Mainline</text>
-  <rect x="390" y="267" width="116" height="18" fill="#f0fdf4" rx="9" stroke="#86efac" stroke-width="1"/>
-  <text x="448" y="279" fill="#15803d" font-size="9" font-weight="600" text-anchor="middle">✓ In Torvalds tree</text>
-  <text x="390" y="304" fill="#374151" font-size="10">max30102.c — SpO₂ / heart-rate</text>
-  <text x="390" y="320" fill="#374151" font-size="10">ti-ads1298.c — ECG ADC fixes</text>
-  <text x="390" y="332" fill="#94a3b8" font-size="9">git.kernel.org/torvalds/linux</text>
+  <!-- VPD card -->
+  <rect x="416" y="232" width="180" height="86" fill="#ffffff" rx="9" stroke="#fcd34d" stroke-width="1.2" filter="url(#shadow)"/>
+  <rect x="416" y="232" width="180" height="5"  fill="#d97706" rx="9"/>
+  <text x="506" y="253" fill="#92400e" font-size="11" font-weight="700" text-anchor="middle">VPD / Board EEPROM</text>
+  <rect x="430" y="256" width="140" height="16" fill="#fef9c3" rx="8" stroke="#fde047" stroke-width="1"/>
+  <text x="500" y="267" fill="#854d0e" font-size="9" font-weight="600" text-anchor="middle">★ Your upstream patch</text>
+  <line x1="430" y1="277" x2="584" y2="277" stroke="#fef3c7" stroke-width="1"/>
+  <text x="430" y="291" fill="#6b7280" font-size="9">Serial · MAC · calibration</text>
+  <text x="430" y="305" fill="#6b7280" font-size="9">Passed to Linux via cmdline</text>
+
+  <!-- Arrow U-Boot → Kernel -->
+  <line x1="314" y1="328" x2="314" y2="350" stroke="#d97706" stroke-width="2" marker-end="url(#arr-amber)"/>
+  <rect x="326" y="332" width="210" height="14" fill="#f8fafc"/>
+  <text x="430" y="343" fill="#92400e" font-size="10" text-anchor="middle">kernel + DTB loaded · VPD passed</text>
+
+  <!-- ══════════ SECTION 3: KERNEL SPACE ══════════ -->
+  <rect x="24" y="356" width="1152" height="188" fill="#eff6ff" rx="12" stroke="#93c5fd" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="44" y="348" width="128" height="20" fill="#2563eb" rx="10"/>
+  <text x="108" y="361" fill="#ffffff" font-size="10" font-weight="700" text-anchor="middle" letter-spacing="1">KERNEL SPACE</text>
+  <rect x="990" y="348" width="188" height="20" fill="#fef9c3" rx="10" stroke="#fde047" stroke-width="1"/>
+  <text x="1084" y="361" fill="#854d0e" font-size="10" font-weight="600" text-anchor="middle">★ Your upstream contributions</text>
+
+  <!-- IIO Drivers Under Review -->
+  <rect x="38"  y="370" width="318" height="160" fill="#ffffff" rx="10" stroke="#93c5fd" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="38"  y="370" width="318" height="6"   fill="#3b82f6" rx="10"/>
+  <rect x="38"  y="374" width="318" height="2"   fill="#3b82f6"/>
+  <text x="197" y="396" fill="#1d4ed8" font-size="12" font-weight="700" text-anchor="middle">IIO Drivers — Under Review</text>
+  <rect x="58"  y="402" width="110" height="17" fill="#fef9c3" rx="8" stroke="#fde047" stroke-width="1"/>
+  <text x="113" y="414" fill="#854d0e" font-size="9" font-weight="600" text-anchor="middle">★ Your patch</text>
+  <line x1="58" y1="424" x2="342" y2="424" stroke="#eff6ff" stroke-width="1"/>
+  <text x="58" y="440" fill="#374151" font-size="10">ads1299.c — 24-bit EEG/ECG driver</text>
+  <text x="58" y="458" fill="#374151" font-size="10">max86150.c — ECG + PPG driver</text>
+  <text x="58" y="476" fill="#94a3b8" font-size="9">lore.kernel.org/linux-iio</text>
+  <text x="58" y="492" fill="#94a3b8" font-size="9">drivers/iio/health/</text>
+  <text x="58" y="508" fill="#94a3b8" font-size="9">Pending Jonathan Cameron review</text>
+
+  <!-- IIO Drivers Merged -->
+  <rect x="368" y="370" width="318" height="160" fill="#ffffff" rx="10" stroke="#93c5fd" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="368" y="370" width="318" height="6"   fill="#3b82f6" rx="10"/>
+  <rect x="368" y="374" width="318" height="2"   fill="#3b82f6"/>
+  <text x="527" y="396" fill="#1d4ed8" font-size="12" font-weight="700" text-anchor="middle">IIO Drivers — Merged to Mainline</text>
+  <rect x="388" y="402" width="116" height="17" fill="#f0fdf4" rx="8" stroke="#86efac" stroke-width="1"/>
+  <text x="446" y="414" fill="#15803d" font-size="9" font-weight="600" text-anchor="middle">✓ In Torvalds tree</text>
+  <line x1="388" y1="424" x2="672" y2="424" stroke="#eff6ff" stroke-width="1"/>
+  <text x="388" y="440" fill="#374151" font-size="10">max30102.c — SpO₂ / heart-rate</text>
+  <text x="388" y="458" fill="#374151" font-size="10">ti-ads1298.c — ECG ADC fixes</text>
+  <text x="388" y="476" fill="#94a3b8" font-size="9">git.kernel.org/torvalds/linux</text>
+  <text x="388" y="492" fill="#94a3b8" font-size="9">drivers/iio/health/ · drivers/iio/adc/</text>
 
   <!-- IIO Subsystem -->
-  <rect x="696" y="232" width="460" height="100" fill="#dbeafe" rx="10" stroke="#3b82f6" stroke-width="1.5" filter="url(#shadow)"/>
-  <text x="926" y="262" fill="#1d4ed8" font-size="13" font-weight="700" text-anchor="middle">Linux IIO Subsystem</text>
-  <text x="926" y="280" fill="#374151" font-size="10" text-anchor="middle">drivers/iio/ · sysfs interface · triggered buffer · DMA ring</text>
-  <text x="926" y="297" fill="#374151" font-size="10" text-anchor="middle">/sys/bus/iio/devices/iio:device0</text>
-  <text x="926" y="314" fill="#374151" font-size="10" text-anchor="middle">/dev/iio:device0 · scan_elements · buffer/enable</text>
-  <text x="926" y="330" fill="#64748b" font-size="9" text-anchor="middle">DRDY IRQ → IIO trigger → kernel DMA → ring buffer → read()</text>
+  <rect x="698" y="370" width="464" height="160" fill="#dbeafe" rx="10" stroke="#3b82f6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="930" y="400" fill="#1d4ed8" font-size="13" font-weight="700" text-anchor="middle">Linux IIO Subsystem</text>
+  <text x="930" y="418" fill="#374151" font-size="10" text-anchor="middle">drivers/iio/ · sysfs interface</text>
+  <line x1="718" y1="426" x2="1148" y2="426" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="718" y="444" fill="#374151" font-size="10">/sys/bus/iio/devices/iio:device0</text>
+  <text x="718" y="460" fill="#374151" font-size="10">/dev/iio:device0 · scan_elements</text>
+  <text x="718" y="476" fill="#374151" font-size="10">buffer/enable · trigger/</text>
+  <text x="718" y="492" fill="#64748b" font-size="9">DRDY IRQ → IIO trigger → DMA ring buffer</text>
+  <text x="718" y="508" fill="#64748b" font-size="9">kernel handles timing · no userspace jitter</text>
 
-  <!-- Arrow down -->
-  <line x1="600" y1="424" x2="600" y2="444" stroke="#dc2626" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrow-red)"/>
-  <rect x="616" y="427" width="166" height="14" fill="#f8fafc"/>
-  <text x="700" y="438" fill="#64748b" font-size="10" text-anchor="middle">epoll_wait() · sysfs read()</text>
+  <!-- kernel/user boundary -->
+  <line x1="24" y1="554" x2="1176" y2="554" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="10,5"/>
+  <rect x="420" y="546" width="362" height="18" fill="#f8fafc"/>
+  <text x="600" y="558" fill="#94a3b8" font-size="11" font-weight="600" text-anchor="middle" letter-spacing="2">─── KERNEL  /  USER SPACE  BOUNDARY ───</text>
 
-  <!-- ── BOUNDARY ── -->
-  <line x1="24" y1="430" x2="1176" y2="430" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="10,5"/>
-  <rect x="456" y="422" width="290" height="18" fill="#f8fafc"/>
-  <text x="600" y="434" fill="#94a3b8" font-size="11" font-weight="600" text-anchor="middle" letter-spacing="2">─── KERNEL  /  USER SPACE ───</text>
+  <!-- Arrow kernel → user -->
+  <line x1="600" y1="554" x2="600" y2="574" stroke="#dc2626" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arr-red)"/>
+  <rect x="614" y="556" width="160" height="14" fill="#f8fafc"/>
+  <text x="694" y="567" fill="#64748b" font-size="10" text-anchor="middle">epoll_wait() · sysfs read()</text>
 
-  <!-- ══════════════════════════════════════════════════════
-       SECTION 3 — USER SPACE
-  ═══════════════════════════════════════════════════════ -->
-  <rect x="24" y="450" width="1152" height="172" fill="#fff1f2" rx="12" stroke="#fca5a5" stroke-width="1.5" filter="url(#shadow)"/>
-  <rect x="44" y="442" width="178" height="20" fill="#dc2626" rx="10"/>
-  <text x="133" y="455" fill="#ffffff" font-size="10" font-weight="700" text-anchor="middle" letter-spacing="1">USER SPACE</text>
-  <text x="232" y="455" fill="#dc2626" font-size="12" font-weight="700">ros2_iio_medical</text>
-
-  <!-- Star badge -->
-  <rect x="978" y="442" width="200" height="20" fill="#fef9c3" rx="10" stroke="#fde047" stroke-width="1"/>
-  <text x="1078" y="455" fill="#854d0e" font-size="10" font-weight="600" text-anchor="middle">★ Your open source package</text>
+  <!-- ══════════ SECTION 4: USER SPACE ══════════ -->
+  <rect x="24" y="580" width="1152" height="154" fill="#fff1f2" rx="12" stroke="#fca5a5" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="44" y="572" width="178" height="20" fill="#dc2626" rx="10"/>
+  <text x="133" y="585" fill="#ffffff" font-size="10" font-weight="700" text-anchor="middle" letter-spacing="1">USER SPACE</text>
+  <text x="232" y="585" fill="#dc2626" font-size="12" font-weight="700">ros2_iio_medical</text>
+  <rect x="978" y="572" width="200" height="20" fill="#fef9c3" rx="10" stroke="#fde047" stroke-width="1"/>
+  <text x="1078" y="585" fill="#854d0e" font-size="10" font-weight="600" text-anchor="middle">★ Your open source package</text>
 
   <!-- iio_bridge card -->
-  <rect x="44"  y="464" width="544" height="144" fill="#ffffff" rx="10" stroke="#fca5a5" stroke-width="1.5" filter="url(#shadow-md)"/>
-  <rect x="44"  y="464" width="544" height="6"   fill="#ef4444" rx="10"/>
-  <rect x="44"  y="468" width="544" height="2"   fill="#ef4444"/>
-  <text x="316" y="492" fill="#dc2626" font-size="13" font-weight="700" text-anchor="middle">iio_bridge</text>
-  <rect x="370" y="480" width="196" height="18" fill="#fef3c7" rx="9" stroke="#fcd34d" stroke-width="1"/>
-  <text x="468" y="492" fill="#92400e" font-size="9" font-weight="600" text-anchor="middle">Polling · Prototyping · Low-rate</text>
-  <line x1="64" y1="502" x2="570" y2="502" stroke="#fee2e2" stroke-width="1"/>
-  <text x="74"  y="520" fill="#6b7280" font-size="10">Reads</text>
-  <text x="120" y="520" fill="#b45309" font-size="10" font-weight="600">in_voltageX_raw</text>
-  <text x="74"  y="538" fill="#6b7280" font-size="10">Applies</text>
-  <text x="120" y="538" fill="#b45309" font-size="10" font-weight="600">in_voltage_scale → mV</text>
-  <text x="74"  y="556" fill="#6b7280" font-size="10">Publishes</text>
-  <text x="120" y="556" fill="#1d4ed8" font-size="10" font-weight="600">Float64MultiArray</text>
-  <text x="74"  y="574" fill="#6b7280" font-size="10">Params</text>
-  <text x="120" y="574" fill="#374151" font-size="10">device_path · num_channels · sample_rate_hz</text>
-  <text x="316" y="596" fill="#b45309" font-size="9" text-anchor="middle">No kernel buffer setup required</text>
+  <rect x="38"  y="594" width="552" height="130" fill="#ffffff" rx="10" stroke="#fca5a5" stroke-width="1.5" filter="url(#shadow-md)"/>
+  <rect x="38"  y="594" width="552" height="6"   fill="#ef4444" rx="10"/>
+  <rect x="38"  y="598" width="552" height="2"   fill="#ef4444"/>
+  <text x="264" y="620" fill="#dc2626" font-size="13" font-weight="700" text-anchor="middle">iio_bridge</text>
+  <rect x="340" y="608" width="228" height="17" fill="#fef3c7" rx="8" stroke="#fcd34d" stroke-width="1"/>
+  <text x="454" y="619" fill="#92400e" font-size="9" font-weight="600" text-anchor="middle">Polling · Prototyping · Low-rate</text>
+  <line x1="58" y1="630" x2="576" y2="630" stroke="#fee2e2" stroke-width="1"/>
+  <text x="58"  y="647" fill="#6b7280" font-size="10">Reads  <tspan fill="#b45309" font-weight="600">in_voltageX_raw</tspan>  via sysfs</text>
+  <text x="58"  y="663" fill="#6b7280" font-size="10">Applies  <tspan fill="#b45309" font-weight="600">in_voltage_scale</tspan>  → mV conversion</text>
+  <text x="58"  y="679" fill="#6b7280" font-size="10">Publishes  <tspan fill="#1d4ed8" font-weight="600">Float64MultiArray</tspan>  at configured rate</text>
+  <text x="58"  y="695" fill="#94a3b8" font-size="9">Params: device_path · num_channels · sample_rate_hz</text>
+  <text x="58"  y="711" fill="#94a3b8" font-size="9">No kernel buffer required · good for first bring-up</text>
 
   <!-- iio_triggered_bridge card -->
-  <rect x="604" y="464" width="556" height="144" fill="#ffffff" rx="10" stroke="#fca5a5" stroke-width="1.5" filter="url(#shadow-md)"/>
-  <rect x="604" y="464" width="556" height="6"   fill="#ef4444" rx="10"/>
-  <rect x="604" y="468" width="556" height="2"   fill="#ef4444"/>
-  <text x="882" y="492" fill="#dc2626" font-size="13" font-weight="700" text-anchor="middle">iio_triggered_bridge</text>
-  <rect x="960" y="480" width="178" height="18" fill="#f0fdf4" rx="9" stroke="#86efac" stroke-width="1"/>
-  <text x="1049" y="492" fill="#15803d" font-size="9" font-weight="600" text-anchor="middle">Production · Hardware-timed</text>
-  <line x1="624" y1="502" x2="1142" y2="502" stroke="#fee2e2" stroke-width="1"/>
-  <text x="630" y="520" fill="#6b7280" font-size="10">epoll_wait() → read() → parse binary sample</text>
-  <text x="630" y="538" fill="#6b7280" font-size="10">Auto channel discovery via scan_elements sysfs</text>
-  <text x="630" y="556" fill="#15803d" font-size="10" font-weight="600">✓ No timer jitter</text>
-  <text x="748" y="556" fill="#15803d" font-size="10" font-weight="600">✓ No missed samples</text>
-  <text x="886" y="556" fill="#15803d" font-size="10" font-weight="600">✓ Hardware-timed</text>
-  <text x="630" y="574" fill="#6b7280" font-size="10">Supports: signed/unsigned · little/big endian · shift · real bits</text>
-  <text x="882" y="596" fill="#b45309" font-size="9" text-anchor="middle">Correct approach for continuous EEG / ECG acquisition</text>
+  <rect x="604" y="594" width="558" height="130" fill="#ffffff" rx="10" stroke="#fca5a5" stroke-width="1.5" filter="url(#shadow-md)"/>
+  <rect x="604" y="594" width="558" height="6"   fill="#ef4444" rx="10"/>
+  <rect x="604" y="598" width="558" height="2"   fill="#ef4444"/>
+  <text x="883" y="620" fill="#dc2626" font-size="13" font-weight="700" text-anchor="middle">iio_triggered_bridge</text>
+  <rect x="960" y="608" width="180" height="17" fill="#f0fdf4" rx="8" stroke="#86efac" stroke-width="1"/>
+  <text x="1050" y="619" fill="#15803d" font-size="9" font-weight="600" text-anchor="middle">Production · Hardware-timed</text>
+  <line x1="624" y1="630" x2="1148" y2="630" stroke="#fee2e2" stroke-width="1"/>
+  <text x="624" y="647" fill="#6b7280" font-size="10">epoll_wait() → read() → parse binary sample from /dev/iio:deviceN</text>
+  <text x="624" y="663" fill="#6b7280" font-size="10">Auto channel discovery via scan_elements sysfs</text>
+  <rect x="624" y="670" width="104" height="17" fill="#f0fdf4" rx="8" stroke="#86efac" stroke-width="1"/>
+  <text x="676" y="681" fill="#15803d" font-size="9" font-weight="600" text-anchor="middle">✓ No timer jitter</text>
+  <rect x="736" y="670" width="118" height="17" fill="#f0fdf4" rx="8" stroke="#86efac" stroke-width="1"/>
+  <text x="795" y="681" fill="#15803d" font-size="9" font-weight="600" text-anchor="middle">✓ No missed samples</text>
+  <rect x="862" y="670" width="124" height="17" fill="#f0fdf4" rx="8" stroke="#86efac" stroke-width="1"/>
+  <text x="924" y="681" fill="#15803d" font-size="9" font-weight="600" text-anchor="middle">✓ Hardware-timed</text>
+  <text x="624" y="711" fill="#94a3b8" font-size="9">Correct approach for continuous EEG / ECG · supports signed/unsigned · endian · shift</text>
 
-  <!-- Arrow down -->
-  <line x1="600" y1="622" x2="600" y2="642" stroke="#16a34a" stroke-width="2" marker-end="url(#arrow-green)"/>
+  <!-- Arrow user → ROS2 -->
+  <line x1="600" y1="734" x2="600" y2="752" stroke="#16a34a" stroke-width="2" marker-end="url(#arr-green)"/>
 
-  <!-- ══════════════════════════════════════════════════════
-       SECTION 4 — ROS 2 OUTPUT
-  ═══════════════════════════════════════════════════════ -->
-  <rect x="24" y="648" width="1152" height="56" fill="#f0fdf4" rx="12" stroke="#86efac" stroke-width="1.5" filter="url(#shadow)"/>
-  <rect x="44" y="640" width="166" height="20" fill="#16a34a" rx="10"/>
-  <text x="127" y="653" fill="#ffffff" font-size="10" font-weight="700" text-anchor="middle" letter-spacing="1">ROS 2 TOPICS</text>
+  <!-- ══════════ SECTION 5: ROS 2 TOPICS ══════════ -->
+  <rect x="24" y="758" width="1152" height="58" fill="#f0fdf4" rx="12" stroke="#86efac" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="44" y="750" width="130" height="20" fill="#16a34a" rx="10"/>
+  <text x="109" y="763" fill="#ffffff" font-size="10" font-weight="700" text-anchor="middle" letter-spacing="1">ROS 2 TOPICS</text>
 
-  <!-- Topic pills -->
-  <rect x="44"  y="658" width="192" height="32" fill="#ffffff" rx="8" stroke="#86efac" stroke-width="1.2"/>
-  <text x="140" y="670" fill="#15803d" font-size="10" font-weight="700" text-anchor="middle">/biosignal/eeg</text>
-  <text x="140" y="683" fill="#64748b" font-size="9"  text-anchor="middle">ADS1299 · 8ch · 250Hz · 24-bit</text>
+  <rect x="44"  y="768" width="196" height="34" fill="#ffffff" rx="8" stroke="#86efac" stroke-width="1.2"/>
+  <text x="142" y="781" fill="#15803d" font-size="10" font-weight="700" text-anchor="middle">/biosignal/eeg</text>
+  <text x="142" y="795" fill="#64748b" font-size="9"  text-anchor="middle">ADS1299 · 8ch · 250Hz · 24-bit</text>
 
-  <rect x="248" y="658" width="212" height="32" fill="#ffffff" rx="8" stroke="#86efac" stroke-width="1.2"/>
-  <text x="354" y="670" fill="#15803d" font-size="10" font-weight="700" text-anchor="middle">/biosignal/ecg_ppg</text>
-  <text x="354" y="683" fill="#64748b" font-size="9"  text-anchor="middle">MAX86150 · 2ch · 100Hz · ECG+PPG</text>
+  <rect x="252" y="768" width="212" height="34" fill="#ffffff" rx="8" stroke="#86efac" stroke-width="1.2"/>
+  <text x="358" y="781" fill="#15803d" font-size="10" font-weight="700" text-anchor="middle">/biosignal/ecg_ppg</text>
+  <text x="358" y="795" fill="#64748b" font-size="9"  text-anchor="middle">MAX86150 · 2ch · ECG + PPG</text>
 
-  <rect x="472" y="658" width="196" height="32" fill="#ffffff" rx="8" stroke="#86efac" stroke-width="1.2"/>
-  <text x="570" y="670" fill="#15803d" font-size="10" font-weight="700" text-anchor="middle">/biosignal/spo2</text>
-  <text x="570" y="683" fill="#64748b" font-size="9"  text-anchor="middle">MAX30102 · 100Hz · SpO₂ · HR</text>
+  <rect x="476" y="768" width="196" height="34" fill="#ffffff" rx="8" stroke="#86efac" stroke-width="1.2"/>
+  <text x="574" y="781" fill="#15803d" font-size="10" font-weight="700" text-anchor="middle">/biosignal/spo2</text>
+  <text x="574" y="795" fill="#64748b" font-size="9"  text-anchor="middle">MAX30102 · 100Hz · SpO₂ / HR</text>
 
-  <!-- Divider -->
-  <line x1="686" y1="658" x2="686" y2="690" stroke="#e2e8f0" stroke-width="1"/>
+  <line x1="686" y1="768" x2="686" y2="802" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="706" y="779" fill="#374151" font-size="10" font-weight="600">Downstream →</text>
+  <text x="806" y="779" fill="#64748b" font-size="10">Robot control</text>
+  <text x="910" y="779" fill="#64748b" font-size="10">·  ML inference</text>
+  <text x="1028" y="779" fill="#64748b" font-size="10">·  rviz2</text>
+  <text x="1100" y="779" fill="#64748b" font-size="10">·  rosbag2</text>
+  <text x="706" y="796" fill="#94a3b8" font-size="9">Clinical logging · Surgical monitoring · Any ROS 2 node</text>
 
-  <!-- Downstream -->
-  <text x="706" y="668" fill="#374151" font-size="10" font-weight="600">Downstream →</text>
-  <text x="806" y="668" fill="#64748b" font-size="10">Robot control</text>
-  <text x="900" y="668" fill="#64748b" font-size="10">·  ML inference</text>
-  <text x="1010" y="668" fill="#64748b" font-size="10">·  rviz2</text>
-  <text x="1110" y="668" fill="#64748b" font-size="10">·  rosbag2</text>
-  <text x="806" y="683" fill="#94a3b8" font-size="9">Clinical logging · Surgical monitoring · Any ROS 2 node</text>
-
-  <!-- ══════════════════════════════════════════════════════
-       FOOTER
-  ═══════════════════════════════════════════════════════ -->
-  <text x="600" y="714" fill="#94a3b8" font-size="10" text-anchor="middle">github.com/kernel-medical/ros2_iio_medical  ·  kernel-medical.github.io/linux-medical-bsp  ·  Apache-2.0</text>
+  <!-- ══════════ FOOTER ══════════ -->
+  <text x="600" y="832" fill="#94a3b8" font-size="10" text-anchor="middle">github.com/kernel-medical/ros2_iio_medical  ·  kernel-medical.github.io/linux-medical-bsp  ·  Apache-2.0</text>
 
 </svg>
